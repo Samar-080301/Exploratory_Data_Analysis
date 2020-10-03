@@ -1,6 +1,11 @@
-e = pd.DataFrame({
-    'col1': ['A', 'A', 'B', 'W', 'F', 'C'],
-    'col2': [2, 1, 9, 8, 7, 4],
-    'col3': [0, 1, 9, 4, 2, 3],
-    'col4': ['a', 'B', 'c', 'D', 'e', 'F']
-})
+import pandas as pd 
+from sklearn import preprocessing
+df = pd.read_csv(r'train.csv',index_col='Id')
+df.head()
+label_encoder = preprocessing.LabelEncoder() 
+for col in df.columns:
+      
+    if df[col].dtype == 'O':
+        df[col] = label_encoder.fit_transform(df[col])
+    print(col) #to check the malacious column
+print(df) 
